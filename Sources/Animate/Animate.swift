@@ -432,7 +432,7 @@ public struct RepeatValue: ExpressibleByIntegerLiteral {
     public static var repeat1: Self { 1 }
     public static var repeat2: Self { 2 }
     public static var repeat3: Self { 3 }
-    public static var slow: Self { .init(-1) }
+    public static var infinite: Self { .init(-1) }
 }
 
 extension BaseElement {
