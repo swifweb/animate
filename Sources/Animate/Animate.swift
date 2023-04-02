@@ -441,7 +441,8 @@ extension BaseElement {
         _ type: AnimationType,
         delay: DelayValue? = nil,
         duration: DurationValue? = nil,
-        repeat: RepeatValue? = nil
+        repeat: RepeatValue? = nil,
+        completionHandler: (() -> Void)? = nil
     ) -> Self {
         if let delay {
             self.animateDelay(delay)
@@ -464,6 +465,20 @@ extension BaseElement {
             }
             self.removeClass(.animated)
             self.removeClass(type.class)
+            completionHandler?()
+        }
+    }
+    
+    @discardableResult
+    public func animate(
+        _ type: AnimationType,
+        delay: DelayValue? = nil,
+        duration: DurationValue? = nil,
+        repeat: RepeatValue? = nil,
+        completionHandler: @escaping (Self) -> Void
+    ) -> Self {
+        animate(type, delay: delay, duration: duration, repeat: `repeat`) {
+            completionHandler(self)
         }
     }
     
